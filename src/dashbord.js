@@ -22,6 +22,7 @@ class Dashbord extends React.Component {
 
     componentDidMount() {
         this.setState({loading:true})
+        setTimeout(()=>{
         Axios.get(`https://reqres.in/api/users`)
             .then(response => response)
             .then(data => this.setState({
@@ -29,7 +30,7 @@ class Dashbord extends React.Component {
                 loading:false,
                 total_pages : data.data.total_pages
 
-            })).catch(error => this.setState({ error: error }))
+            })).catch(error => this.setState({ error: error }))},2000);
     }
 
     handleShow = (e) => {
@@ -56,13 +57,14 @@ class Dashbord extends React.Component {
 
     nextPage = (e)=>{   
         this.setState({loading:true})
-        setTimeout(
-        Axios.get(`https://reqres.in/api/users?page=${e.target.id}`)
+        let aqa=e.target.id;
+        setTimeout(function (){
+        Axios.get(`https://reqres.in/api/users?page=${aqa}`)
             .then(response => response)
             .then(data => this.setState({
                 userlist: data.data.data,
                 loading:false
-            })).catch(error => this.setState({ error: error })),15000);
+            })).catch(error => this.setState({ error: error }))}.bind(this),2000);
 
     }
 

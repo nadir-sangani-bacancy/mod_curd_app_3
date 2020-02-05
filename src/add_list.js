@@ -12,7 +12,8 @@ class Add_list extends React.Component {
                 first_name : '',
                 last_name : '',
                 avatar : avatar,
-            }
+            },
+            loading : false
         }
     }
 
@@ -43,15 +44,22 @@ class Add_list extends React.Component {
 
         updateValueSuccess()
         {
-            Axios.put(`https://reqres.in/api/users/${this.props.match.params.id}`,
+            let id = this.props.match.params.id
+            this.setState({
+                loading :true
+            })
+            setTimeout(function () {
+            Axios.put(`https://reqres.in/api/users/${id}`,
             {
                 "name": this.state.user.first_name,
                 "job": this.state.user.last_name
             })
                     .then(data => data)
-                    .then(alert("success..")                        
-                    
-                    ).catch(error => this.setState({ error: error }));
+                    .then(alert("success.."),
+                    this.setState({
+                        loading : false
+                    }) 
+                    ).catch(error => this.setState({ error: error }))}.bind(this),2000);
 
         }
 
@@ -71,7 +79,7 @@ class Add_list extends React.Component {
                         <Form.Control type="text" name="last_name" placeholder="Enter Last Name" onChange={(e) => this.updateValue(e)} value={last_name}/>
                     </Form.Group>
                     <Button variant="primary" onClick={()=>this.updateValueSuccess()} type="button">
-                        Submit
+                        {this.state.loading ? "sending...." : "Submit"}
                     </Button>
                     <Link to="/list">
                     <Button variant="secondary" type="button">
