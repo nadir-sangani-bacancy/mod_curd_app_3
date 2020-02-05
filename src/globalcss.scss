@@ -1,0 +1,36 @@
+Button {
+    margin-top: 20px;
+    margin-left: 40px;
+}
+Table{
+    margin-top: 20px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    td, th{
+        padding: 10px;
+        border: 1px solid #dddddd;
+        text-align: left;
+    }
+    img{
+        margin: 0px;
+        width: 60px;
+    }
+    Button{
+        
+    }
+}
+
+Form{
+    margin-top: 20px;
+    img{
+        height: 100px;
+        width: 100px;
+    }
+}
+.pagination{
+   position: absolute;
+    right: 20px;
+    top : 10px;
+    
+}
